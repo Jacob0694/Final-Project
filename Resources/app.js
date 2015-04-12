@@ -310,8 +310,6 @@ var textArea = Ti.UI.createTextArea
   borderRadius: 5,
   color: '#888',
   font: {fontSize:20, fontWeight:'bold'},
-  keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
-  returnKeyType: Ti.UI.RETURNKEY_GO,
   textAlign: 'left',
   text:'Full',
   top: 100,
@@ -475,7 +473,7 @@ var title1 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Sports Story 1',
+	text: 'Vandal Football',
 	color:'black',
 	font:{fontSize:'45sp'}
 });
@@ -485,19 +483,19 @@ var text1 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Defense makes some noise',
 	color: 'black'
 });
 story1.add(text1);
-var uicommons = Ti.UI.createImageView
+var footballpic = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: 'ESWSNOEGTDIMAEW.20150411214757.jpg',
 	top: 0,
 	right: 0,
 	height: '100%',
 	width: '30%'
 });
-story1.add(uicommons);///////////
+story1.add(footballpic);///////////
 story1.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -516,7 +514,7 @@ var title2 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Vandal Soccer',
 	color:'black',
 	font:{fontSize:'45sp'}
 });
@@ -525,19 +523,19 @@ var text2 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Soccer Opens Spring Play',
 	color: 'black'
 });
 story2.add(text2);
-var uicommons2 = Ti.UI.createImageView
+var soccerpic = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: 'soccerpic.jpg',
 	top: 0,
 	right: 0,
 	height: '100%',
 	width: '30%'
 });
-story2.add(uicommons2);
+story2.add(soccerpic);
 
 var story3 = Ti.UI.createView/////////////////////Story 3//////////////////////////////////////////////////
 ({
@@ -554,7 +552,7 @@ var title3 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Vandal Tennis',
 	color:'black',
 	font:{fontSize:'45sp'}
 });
@@ -563,19 +561,19 @@ var text3 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Vandals Secure Tourney Spot on Senior Day',
 	color: 'black'
 });
 story3.add(text3);
-var uicommons3 = Ti.UI.createImageView
+var tennispic = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: 'tennispic.jpg',
 	top: 0,
 	right: 0,
 	height: '100%',
 	width: '30%'
 });
-story3.add(uicommons3);
+story3.add(tennispic);
 
 var story4 = Ti.UI.createView/////////////////////Story 4//////////////////////////////////////////////////
 ({
@@ -592,7 +590,7 @@ var title4 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Vandal Golf',
 	color:'black',
 	font:{fontSize:'45sp'}
 });
@@ -601,19 +599,19 @@ var text4 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Vandals Finish Second',
 	color: 'black'
 });
 story4.add(text4);
-var uicommons4 = Ti.UI.createImageView
+var golfpic = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: 'golfpicture.jpg',
 	top: 0,
 	right: 0,
 	height: '100%',
 	width: '30%'
 });
-story4.add(uicommons4);
+story4.add(golfpic);
 
 sportsWind.add(view);
 
