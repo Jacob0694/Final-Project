@@ -584,8 +584,6 @@ var textArea = Ti.UI.createLabel
   borderRadius: 5,
   color: '#888',
   font: {fontSize:20, fontWeight:'bold'},
-  keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
-  returnKeyType: Ti.UI.RETURNKEY_GO,
   textAlign: 'left',
   color:'black',
   font:{fontSize:'13sp'},
@@ -798,6 +796,7 @@ var football = Ti.UI.createImageView
 	height: '50%',
 	width: '30%'
 });
+
 story1.add(football);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////											Full Page View											//////////
@@ -877,6 +876,7 @@ button.addEventListener('click', function(e){
 });
 
 }
+story1.add(football);///////////
 story1.addEventListener('click', function(e){
 	fullSports1();
 });
@@ -896,6 +896,7 @@ var title2 = Ti.UI.createLabel
 	top: 0,
 	left: 0,
 	text: 'Vandal Tennis',
+	text: 'Vandal Soccer',
 	color:'black',
 	font:{fontSize:'25sp'}
 });
@@ -911,11 +912,15 @@ story2.add(text2);
 var tennis = Ti.UI.createImageView
 ({
 	Image: '/Images/tennispic.jpg',
+	text: 'Soccer Opens Spring Play',
+	color: 'black',
 	top: 0,
 	right: 0,
 	height: '50%',
 	width: '30%'
 });
+story2.add(text2);
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////											Full Page View											//////////
 
@@ -998,6 +1003,8 @@ button.addEventListener('click', function(e){
 story2.addEventListener('click', function(e) {fullSports2();});
 story2.add(tennis);
 
+
+
 var story3 = Ti.UI.createView/////////////////////Story 3//////////////////////////////////////////////////
 ({
 	top: '60%',
@@ -1013,7 +1020,11 @@ var title3 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
+
 	text: 'Vandal Lady\n Soccer',
+
+	text: 'Vandal Tennis',
+
 	color:'black',
 	font:{fontSize:'25sp'}
 });
@@ -1022,6 +1033,7 @@ var text3 = Ti.UI.createLabel
 ({
 	top: '53%',
 	left: 0,
+
 	text: 'Soccer Opens Spring Play',
 	color: 'black'
 });
@@ -1032,8 +1044,13 @@ var soccer = Ti.UI.createImageView
 	top: 0,
 	right: 0,
 	height: '50%',
-	width: '30%'
+	width: '30%',
+	text: 'Vandals Secure Tourney Spot on Senior Day',
+	color: 'black'
 });
+story3.add(text3);
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////											Full Page View											//////////
 function fullSports3() {
@@ -1105,6 +1122,9 @@ button.addEventListener('click', function(e){
 story3.addEventListener('click', function(e){fullSports3();});
 story3.add(soccer);
 
+
+
+
 var story4 = Ti.UI.createView/////////////////////Story 4//////////////////////////////////////////////////
 ({
 	top: '80%',
@@ -1133,6 +1153,7 @@ var text4 = Ti.UI.createLabel
 	color: 'black'
 });
 story4.add(text4);
+
 var golf = Ti.UI.createImageView
 ({
 	Image: '/Images/golfpicture.jpg',
@@ -1141,6 +1162,8 @@ var golf = Ti.UI.createImageView
 	height: '50%',
 	width: '30%'
 });
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////											Full Page View											//////////
 function fullSports4() {
@@ -1212,6 +1235,9 @@ button.addEventListener('click', function(e){
 }
 story4.addEventListener('click', function(e){fullSports4();});
 story4.add(golf);
+
+
+
 
 sportsWind.add(view);
 
