@@ -56,4 +56,10 @@
         <target device="mobileweb">true</target>
     </deployment-targets>
     <sdk-version>3.5.0.GA</sdk-version>
+     <modules>
+    <!-- Add the appropriate line(s) to your modules section -->
+    <module platform="android">facebook</module>
+    <module platform="iphone">facebook</module>
+	</modules>
+    <property name="ti.facebook.appid">431808060330515</property>
 </ti:app>

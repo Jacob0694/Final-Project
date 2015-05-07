@@ -4,6 +4,8 @@ Titanium.UI.setBackgroundColor('#000');
 ///////												LOGIN PAGE											////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function homeFunc()
+{
 var loginWind = Ti.UI.createWindow
 ({
 	text: 'Login',
@@ -147,17 +149,37 @@ var forgotpwButton = Ti.UI.createButton
 		},
 });			
 	loginView.add(forgotpwButton);		
-
+var fb = require('facebook');
+fb.appid = 431808060330515;
+fb.permissions = ['publish_stream'];
+fb.addEventListener('login', function(e) {
+    if (e.success) {
+        alert('Logged in');
+    }
+});
+fb.addEventListener('logout', function(e) {
+    alert('Logged out');
+});
+    
+loginView.add(fb.createLoginButton({
+    top : '50%',
+    style : fb.BUTTON_STYLE_WIDE
+}));
 createAccountButton.addEventListener('click', function (e){ ///////EVENT LISTENERS//////////////////////////////
 	CreateAccount();
 });
-
+guestButton.addEventListener('click', function(e){
+	sports();
+});
 okButton.addEventListener('click', function(e){
 	sports();
 });
+forgotpwButton.addEventListener('click', function(e){
+	Titanium.Platform.openURL('https://help.uidaho.edu/security/reset/');
+});
+}
 
-
-
+homeFunc();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////											CREATE ACCOUNT PAGE  									/////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +190,14 @@ var win55 = Titanium.UI.createWindow({
 title: 'Create New Account',
 backgroundColor: '#000000'
 });
-
+var picView = Ti.UI.createView
+({
+	top:16,
+	left:11,
+	height:'10%',
+	width:'20%',
+	backgroundImage:'Images/uofiseal.png'
+});
 var textbox55 = Titanium.UI.createTextField({
 borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 color:'#000000',
@@ -273,12 +302,12 @@ top: 400,
 left: 110,
 width: 100,
 height: 50,
+borderColor:'#D2B45B',
+borderRadius:10,
 });
 
-button55.addEventListener('click', function(e){
-	sports();
-});
-
+button55.addEventListener('click', function(e){options();});
+win55.add(picView);
 win55.add(textbox55);
 win55.add(textbox56);
 win55.add(textbox57);
@@ -295,17 +324,262 @@ win55.open();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////											Full Page View											//////////
+///////											OPTIONS PAGE 											//////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function options() {
+var win1 = Titanium.UI.createWindow({
+title:'Categories',
+backgroundColor:'#D2B45B'
+});
+ 
+var label1 = Titanium.UI.createLabel({
+color:'black',
+text:'Preferences',
+font:{fontSize:30,fontFamily:'Helvetica Neue'},
+textAlign:'center',
+top:'5%',
+width:'auto'
+});
+var picView = Ti.UI.createView
+({
+	top:18,
+	left:9,
+	height:'10%',
+	width:'20%',
+	backgroundImage:'Images/uofiseal.png'
+});
+win1.add(picView);
+var switch1 = Ti.UI.createSwitch({
+value:true,
+top:'20%',
+left: '60%',
+allignment:'left'
+});
+ 
+var label2 = Ti.UI.createLabel({
+color:'black',
+text:'Sports',
+top:'20%',
+left:'15%'
+});
+ 
+var switch2 = Ti.UI.createSwitch({
+value:true,
+top:'25%',
+left: '60%',
+allignment:'left',
+});
+ 
+var label3 = Ti.UI.createLabel({
+color:'black',
+text:'Campus Events',
+top:'25%',
+left:'15%'
+});
+ 
+var switch3 = Ti.UI.createSwitch({
+value:true, 
+top:'30%',
+left: '60%',
+allignment:'left', 
+});
+
+var label4 = Ti.UI.createLabel({
+color:'black',
+text:'Campus News',
+top:'30%',
+left:'15%' 
+});
+
+var switch4 = Ti.UI.createSwitch({
+value:true,
+top:'35%',
+left: '60%',
+allignment:'left', 
+});
+
+var label5 = Ti.UI.createLabel({
+color:'black',
+text:'Community News',
+top:'35%',
+left:'15%'
+});
+ 
+var switch5 = Ti.UI.createSwitch({
+value:true,
+top:'40%',
+left: '60%',
+allignment:'left',
+});
+
+var label6 = Ti.UI.createLabel({
+color:'black',
+text:'Maps',
+top:'40%',
+left:'15%'
+});
+ 
+var switch6 = Ti.UI.createSwitch({
+value:true,
+top:'45%',
+left: '60%',
+allignment:'left',
+});
+ 
+var label7 = Ti.UI.createLabel({
+color:'black',
+text:'Weather',
+top:'45%',
+left:'15%'
+});
+ 
+var switch7 = Ti.UI.createSwitch({
+value:true,
+top:'50%',
+left: '60%',
+allignment:'left',
+});
+ 
+var label8 = Ti.UI.createLabel({
+color:'black',
+text:'Campus Dining',
+top:'50%',
+left:'15%'
+});
+ 
+var switch8 = Ti.UI.createSwitch({
+value:true,
+top:'55%',
+left: '60%',
+allignment:'left',
+});
+ 
+var label9 = Ti.UI.createLabel({
+color:'black',
+text:'Academic Calendar',
+top:'55%',
+left:'15%'
+});
+ 
+var switch9 = Ti.UI.createSwitch({
+value:true,
+top:'60%',
+left: '60%',
+allignment:'left',
+});
+ 
+var label10 = Ti.UI.createLabel({
+color:'black',
+text:'BlackBoard Updates',
+top:'60%',
+left:'15%' 
+});
+
+var submissionButton = Ti.UI.createButton
+({
+	backgroundColor:'#d2b45b',
+	borderColor:'black',
+	borderRadius:'10',
+	title:'Submit',
+	color:'black',
+	height:'6%',
+	width:'17%',
+	left:'20%',
+	top:'70%'
+});
+var changePasswordButton = Ti.UI.createButton
+({
+	borderColor:'black',
+	borderRadius:'10',
+	title:'Change Password',
+	color:'black',
+	height:'6%',
+	width:'35%',
+	top:'80%',
+	left:'20%'
+});
+win1.add(changePasswordButton);
+win1.add(submissionButton);
+win1.add(switch1);
+win1.add(switch2);
+win1.add(switch3);
+win1.add(switch4);
+win1.add(switch5);
+win1.add(switch6);
+win1.add(switch7);
+win1.add(switch8);
+win1.add(switch9);
+win1.add(label1);
+win1.add(label2);
+win1.add(label3);
+win1.add(label4);
+win1.add(label5);
+win1.add(label6);
+win1.add(label7);
+win1.add(label8);
+win1.add(label9);
+win1.add(label10);
+ 
+switch1.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch1.value);
+});
+ 
+switch2.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch2.value);
+});
+ 
+switch3.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch3.value);
+});
+ 
+switch4.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch4.value);
+});
+ 
+switch5.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch5.value);
+});
+ 
+switch6.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch6.value);
+});
+ 
+switch7.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch7.value);
+});
+ 
+switch8.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch8.value);
+});
+ 
+switch9.addEventListener('change',function(e){
+Ti.API.info('Switch value: ' + switch9.value);
+});
+
+submissionButton.addEventListener('click', function(e) {sports();});
+changePasswordButton.addEventListener('click', function(e) {CreateAccount();});
+Ti.API.info('Switch value: ' + switch1.value);
+Ti.API.info('Switch value: ' + switch2.value);
+Ti.API.info('Switch value: ' + switch3.value);
+Ti.API.info('Switch value: ' + switch4.value);
+Ti.API.info('Switch value: ' + switch5.value);
+Ti.API.info('Switch value: ' + switch6.value);
+Ti.API.info('Switch value: ' + switch7.value);
+Ti.API.info('Switch value: ' + switch8.value);
+Ti.API.info('Switch value: ' + switch9.value);
+win1.open();
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////											Full Page View											//////////
 
 function ViewFull() {
 var viewFullWind = Ti.UI.createWindow({
   backgroundColor: 'white'
 });
 
-var textArea = Ti.UI.createTextArea
+var textArea = Ti.UI.createLabel
 ({
-  borderWidth: 2,
   borderColor: '#B8860B',
   borderRadius: 5,
   color: '#888',
@@ -313,9 +587,10 @@ var textArea = Ti.UI.createTextArea
   keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
   returnKeyType: Ti.UI.RETURNKEY_GO,
   textAlign: 'left',
-  text:'Full',
-  top: 100,
-  width: 300, height : 340,
+  color:'black',
+  font:{fontSize:'13sp'},
+  top: '17%',
+  width: '90%', height : '80%',
   editable:false
 });
 viewFullWind.add(textArea);
@@ -338,9 +613,9 @@ var label2 = Ti.UI.createLabel
 ({
   color: 'black',
   font: { fontSize:15 },
-  text: 'Date',
-  textAlign: 'left',
-  top: 70,
+  text: 'Date 4/11/2015',
+  left:'5%',
+  top: 75,
   width: 200, height: 40
 });
 viewFullWind.add(label2);
@@ -348,7 +623,7 @@ viewFullWind.add(label2);
 var button = Titanium.UI.createButton
 ({
    title: 'Return',
-   top: 5,
+   top: '5%',
    width: 100,
    height: 30,
    left: 5,
@@ -363,7 +638,6 @@ viewFullWind.open();
 button.addEventListener('click', function(e){
 	viewFullWind.close();
 });
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -375,7 +649,7 @@ backgroundColor:'#d2b45b',
 top:'20%',
 left:'0%',
 height:'100%',
-width:'25%'
+width:'24%'
 });
 
 
@@ -426,12 +700,39 @@ var button4 = Titanium.UI.createButton({
    backgroundColor:'#d2b45b'
 });
 view.add(button4);
+var logoutButton = Ti.UI.createButton
+({
+	title:'logout',
+	font:{fontSize:'10sp'},
+	color:'black',
+	top:'20%',
+	height:'5%',
+	width:'100%',
+	borderWidth:1,
+	borderColor:'black',
+	backgroundColor:'red'
+});
+view.add(logoutButton);
+var preferences = Ti.UI.createButton
+({
+	title:'Preferences',
+	font:{fontSize:'10sp'},
+	color:'black',
+	top:'25%',
+	height:'5%',
+	width:'100%',
+	borderWidth:1,
+	borderColor:'black',
+	backgroundColor:'blue'
+});
+view.add(preferences);
 
 button1.addEventListener('click', function(e){sports();});
 button2.addEventListener('click', function(e) {CampusNews();});
 button3.addEventListener('click', function(e){CampusEvents();});
 button4.addEventListener('click',function(e){bblearn();});
-
+logoutButton.addEventListener('click',function(e){homeFunc();});
+preferences.addEventListener('click', function(e){options();});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////										SPORTS PAGE													////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -475,31 +776,109 @@ var title1 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Sports Story 1',
+	text: 'Vandal Football',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 story1.add(title1);
  
 var text1 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '47%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Defense makes some noise',
 	color: 'black'
 });
 story1.add(text1);
-var uicommons = Ti.UI.createImageView
+var football = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/ESWSNOEGTDIMAEW.20150411214757.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-story1.add(uicommons);///////////
+story1.add(football);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////											Full Page View											//////////
+
+function fullSports1() {
+var viewFullWind = Ti.UI.createWindow({
+  backgroundColor: '#black'
+});
+
+var textArea = Ti.UI.createLabel
+({
+  borderColor: 'black',
+  borderRadius: 5,
+  backgroundColor:'#d2b45b',
+  color: '#888',
+  font: {fontSize:20, fontWeight:'bold'},
+  keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
+  returnKeyType: Ti.UI.RETURNKEY_GO,
+  textAlign: 'center',
+  text:"MOSCOW, Idaho – Once again, the University of Idaho football team’s offense put up some impressive numbers. But so, too, did the defense in the Vandals’ second scrimmage of the spring Saturday at the Kibbie Dome. While quarterbacks Matt Linehan and Jake Luton (with 16 yards from Gunnar Amos), combined for 649 yards, there was one interception and they were sent scampering around the backfield by a defensive unit that tallied 18 sacks and six hurries. Add an additional 11 pass breakups and it is easy to see why coach Paul Petrino had words of praise for the defense. This was probably the first scrimmage since I’ve been here where the defense got after the offense that much, said Petrino, who is in his third spring as the Vandals’ head coach. The last 50 plays, they really got after them. He wasn’t without words of praise for the offense as he commended, in particular, the play of receiver-turned-tight end Deon Watson as well as receivers Dezmon Epps, Jacob Sannon and Dave Ungerer. Epps led the way with nine catches for 165 yards with Watson accounting for 135 yards on six receptions. Ungerer had 106 yards on seven catches with Sannon adding 72 on seven. It was the defense, though, that impressed the most and again it was true freshman linebacker Kaden Elliss making an impact along with veteran defensive end Quinton Bradley. Elliss had 17 tackles, which includes five tackles for loss (one sack), with Bradley tallying 10 tackles with six of those tackles for losses (five being sacks). The guys up front played really well, Petrino said. We’re so much better than we’ve been. So much so, he said, he doesn’t even think of the past. I don’t want to compare to anything we’ve been, he said, I want to compare to where we need to be to win our conference. We’re just better all the way around.",
+  color:'black',
+  font:{fontSize:'13sp'},
+  top: '17%',
+  width: '93%', height : '80%',
+  editable:false
+});
+viewFullWind.add(textArea);
+
+var label1 = Ti.UI.createLabel
+({
+  color: '#d2b45b',
+  font: { fontSize:'25sp' },
+  text: 'Vandal Football',
+  left: '40%',
+  top: 17,
+  width: 300, height: 70
+});
+viewFullWind.add(label1);
+var headerPic = Ti.UI.createView
+({
+	backgroundImage:'/Images/ESWSNOEGTDIMAEW.20150411214757.jpg',
+	left:5,
+	top:14,
+	height:70,
+	width:'35%'
+});
+viewFullWind.add(headerPic);
+var label2 = Ti.UI.createLabel
+({
+  color: '#d2b45b',
+  font: { fontSize:15 },
+  text: 'Date 4/11/2015',
+  left:'5%',
+  top: 75,
+  width: 200, height: 40
+});
+viewFullWind.add(label2);
+
+var button = Titanium.UI.createButton
+({
+   title: 'Return',
+   color:'black',
+   top: 75,
+   width: 100,
+   height: 30,
+   left: '70%',
+   backgroundColor:'#d2b45b',
+   borderWidth:1,
+   borderColor:'black'
+});
+viewFullWind.add(button);
+
+viewFullWind.open();
+
+button.addEventListener('click', function(e){
+	viewFullWind.close();
+});
+
+}
 story1.addEventListener('click', function(e){
-	ViewFull();
+	fullSports1();
 });
 var story2 = Ti.UI.createView/////////////////////Story 2//////////////////////////////////////////////////
 ({
@@ -516,28 +895,108 @@ var title2 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Vandal Tennis',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 story2.add(title2);
 var text2 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '47%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Vandals Secure Tourney Spot',
 	color: 'black'
 });
 story2.add(text2);
-var uicommons2 = Ti.UI.createImageView
+var tennis = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/tennispic.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-story2.add(uicommons2);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////											Full Page View											//////////
+
+function fullSports2() {
+var viewFullWind = Ti.UI.createWindow({
+  backgroundColor: '#black'
+});
+
+var textArea = Ti.UI.createLabel
+({
+  borderColor: 'black',
+  borderRadius: 5,
+  backgroundColor:'#d2b45b',
+  color: '#888',
+  font: {fontSize:20, fontWeight:'bold'},
+  keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
+  returnKeyType: Ti.UI.RETURNKEY_GO,
+  textAlign: 'center',
+  text:"MOSCOW, Idaho – Once again, the University of Idaho football team’s offense put up some impressive numbers. But so, too, did the defense in the Vandals’ second scrimmage of the spring Saturday at the Kibbie Dome. While quarterbacks Matt Linehan and Jake Luton (with 16 yards from Gunnar Amos), combined for 649 yards, there was one interception and they were sent scampering around the backfield by a defensive unit that tallied 18 sacks and six hurries. Add an additional 11 pass breakups and it is easy to see why coach Paul Petrino had words of praise for the defense. This was probably the first scrimmage since I’ve been here where the defense got after the offense that much, said Petrino, who is in his third spring as the Vandals’ head coach. The last 50 plays, they really got after them. He wasn’t without words of praise for the offense as he commended, in particular, the play of receiver-turned-tight end Deon Watson as well as receivers Dezmon Epps, Jacob Sannon and Dave Ungerer. Epps led the way with nine catches for 165 yards with Watson accounting for 135 yards on six receptions. Ungerer had 106 yards on seven catches with Sannon adding 72 on seven. It was the defense, though, that impressed the most and again it was true freshman linebacker Kaden Elliss making an impact along with veteran defensive end Quinton Bradley. Elliss had 17 tackles, which includes five tackles for loss (one sack), with Bradley tallying 10 tackles with six of those tackles for losses (five being sacks). The guys up front played really well, Petrino said. We’re so much better than we’ve been. So much so, he said, he doesn’t even think of the past. I don’t want to compare to anything we’ve been, he said, I want to compare to where we need to be to win our conference. We’re just better all the way around.",
+  color:'black',
+  font:{fontSize:'13sp'},
+  top: '17%',
+  width: '93%', height : '80%',
+  editable:false
+});
+viewFullWind.add(textArea);
+
+var label1 = Ti.UI.createLabel
+({
+  color: '#d2b45b',
+  font: { fontSize:'25sp' },
+  text: 'Vandal Tennis',
+  left: '40%',
+  top: 17,
+  width: 300, height: 70
+});
+viewFullWind.add(label1);
+var headerPic = Ti.UI.createView
+({
+	backgroundImage:'/Images/tennispic.jpg',
+	left:5,
+	top:14,
+	height:70,
+	width:'35%'
+});
+viewFullWind.add(headerPic);
+var label2 = Ti.UI.createLabel
+({
+  color: '#d2b45b',
+  font: { fontSize:15 },
+  text: 'Date 4/11/2015',
+  left:'5%',
+  top: 75,
+  width: 200, height: 40
+});
+viewFullWind.add(label2);
+
+var button = Titanium.UI.createButton
+({
+   title: 'Return',
+   color:'black',
+   top: 75,
+   width: 100,
+   height: 30,
+   left: '70%',
+   backgroundColor:'#d2b45b',
+   borderWidth:1,
+   borderColor:'black'
+});
+viewFullWind.add(button);
+
+viewFullWind.open();
+
+button.addEventListener('click', function(e){
+	viewFullWind.close();
+});
+
+}
+
+story2.addEventListener('click', function(e) {fullSports2();});
+story2.add(tennis);
 
 var story3 = Ti.UI.createView/////////////////////Story 3//////////////////////////////////////////////////
 ({
@@ -554,28 +1013,97 @@ var title3 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Vandal Lady\n Soccer',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 story3.add(title3);
 var text3 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '53%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Soccer Opens Spring Play',
 	color: 'black'
 });
 story3.add(text3);
-var uicommons3 = Ti.UI.createImageView
+var soccer = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/soccerpic.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-story3.add(uicommons3);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////											Full Page View											//////////
+function fullSports3() {
+var viewFullWind = Ti.UI.createWindow({
+  backgroundColor: 'white'
+});
+
+var textArea = Ti.UI.createTextArea
+({
+  borderWidth: 2,
+  borderColor: '#B8860B',
+  borderRadius: 5,
+  color: '#888',
+  font: {fontSize:20, fontWeight:'bold'},
+  keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
+  returnKeyType: Ti.UI.RETURNKEY_GO,
+  textAlign: 'left',
+  text:'Full',
+  top: 100,
+  width: 300, height : 340,
+  editable:false
+});
+viewFullWind.add(textArea);
+
+var label1 = Ti.UI.createLabel
+({
+  color: 'black',
+  font: { fontSize:20 },
+  shadowColor: '#aaa',
+  shadowOffset: {x:5, y:5},
+  shadowRadius: 3,
+  text: 'Text',
+  textAlign: 'center',
+  top: 20,
+  width: 300, height: 70
+});
+viewFullWind.add(label1);
+
+var label2 = Ti.UI.createLabel
+({
+  color: 'black',
+  font: { fontSize:15 },
+  text: 'Date',
+  textAlign: 'left',
+  top: 70,
+  width: 200, height: 40
+});
+viewFullWind.add(label2);
+
+var button = Titanium.UI.createButton
+({
+   title: 'Return',
+   top: '5%',
+   width: 100,
+   height: 30,
+   left: 5,
+   backgroundColor:'#B8860B',
+   borderWidth:1,
+   borderColor:'black'
+});
+viewFullWind.add(button);
+
+viewFullWind.open();
+
+button.addEventListener('click', function(e){
+	viewFullWind.close();
+});
+}
+story3.addEventListener('click', function(e){fullSports3();});
+story3.add(soccer);
 
 var story4 = Ti.UI.createView/////////////////////Story 4//////////////////////////////////////////////////
 ({
@@ -592,28 +1120,98 @@ var title4 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Vandal Golf',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 story4.add(title4);
 var text4 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Vandals Finish Second',
 	color: 'black'
 });
 story4.add(text4);
-var uicommons4 = Ti.UI.createImageView
+var golf = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/golfpicture.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-story4.add(uicommons4);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////											Full Page View											//////////
+function fullSports4() {
+var viewFullWind = Ti.UI.createWindow({
+  backgroundColor: 'white'
+});
+
+var textArea = Ti.UI.createTextArea
+({
+  borderWidth: 2,
+  borderColor: '#B8860B',
+  borderRadius: 5,
+  color: '#888',
+  font: {fontSize:20, fontWeight:'bold'},
+  keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
+  returnKeyType: Ti.UI.RETURNKEY_GO,
+  textAlign: 'left',
+  text:'Full',
+  top: 100,
+  width: 300, height : 340,
+  editable:false
+});
+viewFullWind.add(textArea);
+
+var label1 = Ti.UI.createLabel
+({
+  color: 'black',
+  font: { fontSize:20 },
+  shadowColor: '#aaa',
+  shadowOffset: {x:5, y:5},
+  shadowRadius: 3,
+  text: 'Text',
+  textAlign: 'center',
+  top: 20,
+  width: 300, height: 70
+});
+viewFullWind.add(label1);
+
+var label2 = Ti.UI.createLabel
+({
+  color: 'black',
+  font: { fontSize:15 },
+  text: 'Date',
+  textAlign: 'left',
+  top: 70,
+  width: 200, height: 40
+});
+viewFullWind.add(label2);
+
+var button = Titanium.UI.createButton
+({
+   title: 'Return',
+   top: '5%',
+   width: 100,
+   height: 30,
+   left: 5,
+   backgroundColor:'#B8860B',
+   borderWidth:1,
+   borderColor:'black'
+});
+viewFullWind.add(button);
+
+viewFullWind.open();
+
+button.addEventListener('click', function(e){
+	viewFullWind.close();
+});
+
+}
+story4.addEventListener('click', function(e){fullSports4();});
+story4.add(golf);
 
 sportsWind.add(view);
 
@@ -635,7 +1233,7 @@ var cNW = Ti.UI.createWindow 												//cNT = Campus News Title //
 																			////////////////////////////
 var cNT = Ti.UI.createView
 ({
-	backgroundImage: '/Images/Summer-Sand-Volleyball.jpg',
+	backgroundImage: '/Images/campusnews.jpg',
 	top: 0,
 	width: '100%',
 	height: '20%'
@@ -647,7 +1245,8 @@ var cNL = Ti.UI.createLabel
 	right:'10%',
 	font:{
 		fontSize:'45sp'
-	}
+	},
+	top:'35%'
 });
 cNT.add(cNL);
 var cNS1 = Ti.UI.createView /////////CAMPUS NEWS STORY 1//////////////////////////////////////////////////////////
@@ -664,28 +1263,28 @@ var cNT1 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Campus News Story 1',
+	text: 'BLOCK Fest',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 cNS1.add(cNT1);
 var cNTE1 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Teaches parents and children value of playing',
 	color: 'black'
 });
 cNS1.add(cNTE1);
-var uicommons = Ti.UI.createImageView
+var blocks = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/abc_blocks.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-cNS1.add(uicommons);
+cNS1.add(blocks);
 cNS1.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -704,28 +1303,28 @@ var cNT2 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Engineering\n Inductions',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 cNS2.add(cNT2);
 var cNTE2 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '50%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Idaho to induct 2015 academy of engineers',
 	color: 'black'
 });
 cNS2.add(cNTE2);
-var uicommons = Ti.UI.createImageView
+var gears = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/09engineering1.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-cNS2.add(uicommons);
+cNS2.add(gears);
 cNS2.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -744,28 +1343,28 @@ var cNT3 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Commencement',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 cNS3.add(cNT3);
 var cNTE3 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Commencement ceremonies in 4 locations',
 	color: 'black'
 });
 cNS3.add(cNTE3);
-var uicommons = Ti.UI.createImageView
+var hat = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/graduation1.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-cNS3.add(uicommons);
+cNS3.add(hat);
 cNS3.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -784,28 +1383,28 @@ var cNT4 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Association of\nLaw Schools',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 cNS4.add(cNT4);
 var cNTE4 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '52%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Idaho becomes member of international association',
 	color: 'black'
 });
 cNS4.add(cNTE4);
-var uicommons = Ti.UI.createImageView
+var law = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/Law Portal.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-cNS4.add(uicommons);
+cNS4.add(law);
 cNS4.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -826,7 +1425,7 @@ var cEW = Ti.UI.createWindow 										//cET = Campus Events Title //
 																	//////////////////////////////
 var cET = Ti.UI.createView											
 ({																		
-	backgroundImage: '/Images/Summer-Sand-Volleyball.jpg',
+	backgroundImage: '/Images/campus events.jpg',
 	top: 0,
 	width: '100%',
 	height: '20%'
@@ -835,6 +1434,7 @@ cEW.add(cET);
 var cEL = Ti.UI.createLabel
 ({
 	text: 'Campus Events',
+	color:'#d2b45b',
 	right:'10%',
 	font:{
 		fontSize:'45sp'
@@ -862,7 +1462,7 @@ var cET1 = Ti.UI.createLabel
 cES1.add(cET1);
 var cETE1 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '50%',
 	left: 0,
 	text: 'April 13 - April 24\n ALB 203/n 8:00am - 5:00pm',
 	color: 'black'
@@ -874,7 +1474,7 @@ var barkerTrading = Ti.UI.createImageView
 	Image: '/Images/barkerTrading.jpeg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
 cES1.add(barkerTrading);
@@ -896,14 +1496,14 @@ var cET2 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Josh Collette - Fish And Wildlife Seminar',
+	text: 'Josh Collette - \nFish And Wildlife\nSeminar',
 	color:'black',
-	font:{fontSize:'20sp'}
+	font:{fontSize:'25sp'}
 });
 cES2.add(cET2);
 var cETE2 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '71%',
 	left: 0,
 	text: 'April 13 11:30am - 12:30pm',
 	color: 'black'
@@ -914,7 +1514,7 @@ var FishandWildlife = Ti.UI.createImageView
 	Image: '/Images/FishandWildlife.jpeg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
 cES2.add(FishandWildlife);
@@ -936,28 +1536,28 @@ var cET3 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Moms Weekend',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 cES3.add(cET3);
 var cETE3 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Time for a visit from Mom',
 	color: 'black'
 });
 cES3.add(cETE3);
-var uicommons = Ti.UI.createImageView
+var mom = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/moms_2015_181x137.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-cES3.add(uicommons);
+cES3.add(mom);
 cES3.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -976,28 +1576,28 @@ var cET4 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Job Seeker\nTraining',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 cES4.add(cET4);
 var cETE4 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '48%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'Mental training for job seekers',
 	color: 'black'
 });
 cES4.add(cETE4);
-var uicommons = Ti.UI.createImageView
+var brain = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/brain1.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-cES4.add(uicommons);
+cES4.add(brain);
 cES4.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -1018,21 +1618,13 @@ var bbLW = Ti.UI.createWindow 										//bbLT = bblearn Title //
 																	/////////////////////////
 var bbLT = Ti.UI.createView											
 ({																		
-	backgroundImage: '/Images/Summer-Sand-Volleyball.jpg',
+	backgroundImage: '/Images/bblearn.jpg',
 	top: 0,
 	width: '100%',
 	height: '20%'
 });
 bbLW.add(bbLT);
-var bbLL = Ti.UI.createLabel
-({
-	text: 'Bblearn Updates',
-	right:'10%',
-	font:{
-		fontSize:'45sp'
-	}
-});
-bbLT.add(bbLL);
+
 var bbLU1 = Ti.UI.createView /////////BBLEARN UPDATE 1////////////////////////////////////////////////////////////
 ({
 	top: '20%',
@@ -1047,28 +1639,28 @@ var bbLT1 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Bblearn update 1',
+	text: 'Grade Posted',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 bbLU1.add(bbLT1);
 var bbLTE1 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'BUS 301 Quiz Grade',
 	color: 'black'
 });
 bbLU1.add(bbLTE1);
-var uicommons = Ti.UI.createImageView
+var learn = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/a-plus-grade.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-bbLU1.add(uicommons);
+bbLU1.add(learn);
 bbLU1.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -1085,30 +1677,30 @@ var bbLU2 = Ti.UI.createView/////////BBLEARN UPDATE 2///////////////////////////
 bbLW.add(bbLU2);
 var bbLT2 = Ti.UI.createLabel
 ({
-	top: 0,
+	top: '5%',
 	left: 0,
-	text: 'Story 1',
+	text: 'Assignment\nAvailable',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 bbLU2.add(bbLT2);		
 var bbLTE2 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '50%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'BUS 353 assingment posted',
 	color: 'black'
 });
 bbLU2.add(bbLTE2);
-var uicommons = Ti.UI.createImageView
+var learn1 = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/a-plus-grade.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-bbLU2.add(uicommons);
+bbLU2.add(learn1);
 bbLU2.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -1127,28 +1719,28 @@ var bbLT3 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Feedback posted',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 bbLU3.add(bbLT3);
 var bbLTE3 = Ti.UI.createLabel
 ({
-	top: '45%',
+	top: '48%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'BUS 350 feedback completed',
 	color: 'black'
 });
 bbLU3.add(bbLTE3);
-var uicommons = Ti.UI.createImageView
+var learn2 = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/a-plus-grade.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-bbLU3.add(uicommons);
+bbLU3.add(learn2);
 bbLU3.addEventListener('click', function(e){
 	ViewFull();
 });
@@ -1167,28 +1759,28 @@ var bbLT4 = Ti.UI.createLabel
 ({
 	top: 0,
 	left: 0,
-	text: 'Story 1',
+	text: 'Test posted',
 	color:'black',
-	font:{fontSize:'45sp'}
+	font:{fontSize:'25sp'}
 });
 bbLU4.add(bbLT4);
 var bbLTE4 = Ti.UI.createLabel
 ({
 	top: '45%',
 	left: 0,
-	text: 'This is the first story\n something else',
+	text: 'BUS 454 test available',
 	color: 'black'
 });
 bbLU4.add(bbLTE4);
-var uicommons = Ti.UI.createImageView
+var learn3 = Ti.UI.createImageView
 ({
-	Image: '/Images/uicommons.jpg',
+	Image: '/Images/a-plus-grade.jpg',
 	top: 0,
 	right: 0,
-	height: '100%',
+	height: '50%',
 	width: '30%'
 });
-bbLU4.add(uicommons);
+bbLU4.add(learn3);
 bbLU4.addEventListener('click', function(e){
 	ViewFull();
 });
